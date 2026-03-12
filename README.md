@@ -29,7 +29,7 @@ VPS 3 (Agent) ──POST /report──►
 在任意一台机器上运行：
 
 ```bash
-sudo bash <(wget -qO- https://raw.githubusercontent.com/utada1stlove/vps-traffic-report/refs/heads/main/vps-traffic.sh)
+wget -qO /tmp/vps.sh https://raw.githubusercontent.com/utada1stlove/vps-traffic-report/refs/heads/main/vps-traffic.sh && bash /tmp/vps.sh
 ```
 
 或者克隆仓库后运行：
@@ -80,7 +80,7 @@ sudo bash vps-traffic-report/vps-traffic.sh
 重新运行管理脚本，选择「3」卸载 Agent 或「4」卸载 Central Server：
 
 ```bash
-sudo bash <(wget -qO- https://raw.githubusercontent.com/utada1stlove/vps-traffic-report/refs/heads/main/vps-traffic.sh)
+wget -qO /tmp/vps.sh https://raw.githubusercontent.com/utada1stlove/vps-traffic-report/refs/heads/main/vps-traffic.sh && bash /tmp/vps.sh
 ```
 
 ---

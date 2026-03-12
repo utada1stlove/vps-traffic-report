@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 # ==============================================================
 #  VPS Traffic Monitor — 一键管理脚本
-#  用法：sudo bash vps-traffic.sh
-#  或：  bash <(wget -qO- https://your-host/vps-traffic.sh)
+#  用法：
+#    wget -qO /tmp/vps.sh https://raw.githubusercontent.com/utada1stlove/vps-traffic-report/refs/heads/main/vps-traffic.sh && bash /tmp/vps.sh
 # ==============================================================
 set -euo pipefail
+
+# 当 stdin 是管道时（wget ... | bash），重定向到终端以支持交互式输入
+# 若 /dev/tty 不可用（无控制终端），则跳过（脚本会在后续 read 时自然报错）
+[[ -t 0 ]] || exec </dev/tty 2>/dev/null || true
 
 # ── 颜色 ──────────────────────────────────────────────────────
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'
