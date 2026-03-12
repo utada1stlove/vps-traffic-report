@@ -13,10 +13,10 @@ set -euo pipefail
 # ── 颜色 ──────────────────────────────────────────────────────
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'
 CYAN='\033[0;36m'; BOLD='\033[1m'; NC='\033[0m'
-info()    { echo -e "${GREEN}[+]${NC} $*"; }
-warn()    { echo -e "${YELLOW}[!]${NC} $*"; }
+info()    { echo -e "${GREEN}[+]${NC} $*" >&2; }
+warn()    { echo -e "${YELLOW}[!]${NC} $*" >&2; }
 error()   { echo -e "${RED}[✗]${NC} $*" >&2; }
-success() { echo -e "${GREEN}[✓]${NC} $*"; }
+success() { echo -e "${GREEN}[✓]${NC} $*" >&2; }
 
 # ── 常量 ──────────────────────────────────────────────────────
 AGENT_DIR="/opt/vps-agent"
@@ -498,7 +498,10 @@ PYEOF
 # ══════════════════════════════════════════════════════════════
 
 check_root() {
-    [[ $EUID -ne 0 ]] && { error "请以 root 运行：sudo bash vps-traffic.sh"; exit 1; }
+    if [[ $EUID -ne 0 ]]; then
+        error "请以 root 运行：sudo bash vps-traffic.sh"
+        exit 1
+    fi
 }
 
 ensure_python() {
