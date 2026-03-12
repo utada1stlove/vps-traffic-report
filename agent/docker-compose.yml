@@ -1,0 +1,11 @@
+services:
+  agent:
+    build: .
+    restart: unless-stopped
+    network_mode: host          # required to read /proc/net/dev of the host
+    env_file: .env
+    volumes:
+      - agent-state:/var/lib/vps-agent
+
+volumes:
+  agent-state:
