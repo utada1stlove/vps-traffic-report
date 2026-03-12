@@ -29,13 +29,13 @@ VPS 3 (Agent) ──POST /report──►
 在任意一台机器上运行：
 
 ```bash
-sudo bash <(wget -qO- https://your-host/vps-traffic.sh)
+sudo bash <(wget -qO- https://raw.githubusercontent.com/utada1stlove/vps-traffic-report/refs/heads/main/vps-traffic.sh)
 ```
 
 或者克隆仓库后运行：
 
 ```bash
-git clone https://github.com/yourname/vps-traffic-report.git
+git clone https://github.com/utada1stlove/vps-traffic-report.git
 sudo bash vps-traffic-report/vps-traffic.sh
 ```
 
@@ -77,12 +77,10 @@ sudo bash vps-traffic-report/vps-traffic.sh
 
 ## 卸载
 
-```bash
-# Agent VPS 上
-sudo bash /opt/vps-agent/uninstall.sh
+重新运行管理脚本，选择「3」卸载 Agent 或「4」卸载 Central Server：
 
-# Central Server 上
-sudo bash /opt/vps-central/uninstall.sh
+```bash
+sudo bash <(wget -qO- https://raw.githubusercontent.com/utada1stlove/vps-traffic-report/refs/heads/main/vps-traffic.sh)
 ```
 
 ---
@@ -90,13 +88,13 @@ sudo bash /opt/vps-central/uninstall.sh
 ## 项目结构
 
 ```
+vps-traffic.sh       ← 一键管理脚本（安装/卸载，内嵌所有源码）
+
 agent/
   agent.py           主循环：采集流量 + POST 上报
   traffic_lib.py     读取 /proc/net/dev，计算增量，持久化状态
-  install.sh         一键安装（systemd + venv）
-  uninstall.sh       一键卸载
   .env.example       配置项说明
-  README.md          Agent 安装文档
+  README.md          Agent 详细文档
 
 central/
   main.py            入口：启动 HTTP 服务线程 + Bot 主循环
@@ -104,10 +102,8 @@ central/
   bot.py             Telegram Bot，处理命令和定时推送
   store.py           SQLite 封装，按节点按月累计流量
   message.py         格式化 Telegram 消息
-  install.sh         一键安装（systemd + venv）
-  uninstall.sh       一键卸载
   .env.example       配置项说明
-  README.md          Central 安装文档
+  README.md          Central 详细文档
 ```
 
 ---
